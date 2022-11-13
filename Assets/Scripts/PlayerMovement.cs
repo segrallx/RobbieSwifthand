@@ -110,7 +110,9 @@ public class PlayerMovement : MonoBehaviour
         // 小于0是人物朝左，大于0是人物朝右。
         float direction = transform.localScale.x;
         Vector2 grabDir = new Vector2(direction, 0);
-        //Debug.LogFormat("direction {0} playerHeight {1} grabDir {2} grabDistance {3}", transform.localScale, playerHeight, grabDir, grabDistance);
+
+        //Debug.LogFormat("direction {0} playerHeight {1} grabDir {2} grabDistance {3}",
+		//transform.localScale, playerHeight, grabDir, grabDistance);
 
         RaycastHit2D blockCheck = Raycast(new Vector2(footOffset * direction, playerHeight),
                                           grabDir, grabDistance, groundLayer);
@@ -120,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
                                           Vector2.down, grabDistance, groundLayer);
 
         Debug.LogFormat("hanging check velocity.y {0}", rb.velocity.y);
+
         if (!isOnGround && rb.velocity.y < 0f && ledgeCheck && wallCheck && !blockCheck)
         {
             this.rb.bodyType = RigidbodyType2D.Static;
@@ -217,7 +220,6 @@ public class PlayerMovement : MonoBehaviour
 				rb.bodyType = RigidbodyType2D.Dynamic;
 				isHanging = false;
 			}
-
         }
 
         if (jumpPressed && isOnGround && !isJump)
