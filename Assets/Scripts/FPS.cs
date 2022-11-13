@@ -10,7 +10,7 @@ public class FPS : MonoBehaviour
     public Text fpsText;
 
 	float deltaTime;
-	
+
 	void Update ()
 	{
 		deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;

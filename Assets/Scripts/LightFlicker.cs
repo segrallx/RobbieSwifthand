@@ -8,7 +8,7 @@ public class LightFlicker : MonoBehaviour
 {
     public float amount;	//The amount of light flicker
     public float speed;		//The speed of the flicker
-    
+
     Light localLight;		//Reference to the light component
     float intensity;		//The collective intensity of the light component
 	float offset;			//An offset so all flickers are different
