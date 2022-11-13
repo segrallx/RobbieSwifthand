@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     bool jumpPressed;
     bool jumpHeld;
     bool crouchHeld;
-	bool crouchPress;
+    bool crouchPress;
 
     float xVelocity;
 
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
         jumpHeld = Input.GetButton("Jump");
         crouchHeld = Input.GetButton("Crouch");
-		crouchPress = Input.GetButtonDown("Crouch");
+        crouchPress = Input.GetButtonDown("Crouch");
     }
 
     private void FixedUpdate()
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 grabDir = new Vector2(direction, 0);
 
         //Debug.LogFormat("direction {0} playerHeight {1} grabDir {2} grabDistance {3}",
-		//transform.localScale, playerHeight, grabDir, grabDistance);
+        //transform.localScale, playerHeight, grabDir, grabDistance);
 
         RaycastHit2D blockCheck = Raycast(new Vector2(footOffset * direction, playerHeight),
                                           grabDir, grabDistance, groundLayer);
@@ -216,15 +216,16 @@ public class PlayerMovement : MonoBehaviour
                 Debug.LogFormat("hanging exit velocity.y {0}", rb.velocity.y);
             }
 
-			if(crouchPress)  {
-				rb.bodyType = RigidbodyType2D.Dynamic;
-				isHanging = false;
-			}
+            if (crouchPress)
+            {
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                isHanging = false;
+            }
         }
 
-        if (jumpPressed && isOnGround && !isJump)
+        if (jumpPressed && isOnGround && !isJump && !isHeadBlocked)
         {
-            if (isCrouch && isCrouch && !isHeadBlocked)
+            if (isCrouch)
             {
                 StandUp();
                 rb.AddForce(new Vector2(0f, crouchJumpBoost), ForceMode2D.Impulse);
