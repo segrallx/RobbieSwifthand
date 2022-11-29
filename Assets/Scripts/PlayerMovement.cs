@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     bool crouchHeld;
     bool crouchPress;
 
-    float xVelocity;
+    public float xVelocity;
 
     // colloider size
     Vector2 colliderStandSize;
@@ -121,6 +121,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D ledgeCheck = Raycast(new Vector2(reachOffset * direction, playerHeight),
                                           Vector2.down, grabDistance, groundLayer);
 
+
+
         Debug.LogFormat("hanging check velocity.y {0}", rb.velocity.y);
 
         if (!isOnGround && rb.velocity.y < 0f && ledgeCheck && wallCheck && !blockCheck)
@@ -182,11 +184,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (xVelocity < 0)
         {
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector3(-1, 1,1);
         }
         else if (xVelocity > 0)
         {
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
