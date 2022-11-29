@@ -236,6 +236,7 @@ public class PlayerMovement : MonoBehaviour
             isJump = true;
             isOnGround = false;
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            AudioManager.PlayJumpAudio();
 
             jumpTime = Time.time + jumpHoldDuration;
         }
