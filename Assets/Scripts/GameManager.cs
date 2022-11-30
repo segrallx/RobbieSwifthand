@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	SceneFader fader;
 	List<Orb> orbs;
 	public int orbNum;
+	public int deathNum;
 
 	private void Awake()
 	{
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 	public static void PlayerDied()
     {
 		instance.Invoke("RestartScene", 1.5f);
+		instance.deathNum += 1;
     }
 
 	public static void RegisterOrb(Orb orb)
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
 		instance.fader.FadeOut();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		instance.orbs.Clear();
 	}
 
 	public static void RegisterSceneFader(SceneFader obj)
@@ -50,5 +53,15 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 		orbNum = orbs.Count;
+    }
+
+
+	public static void PlayerGrabbedOrb(Orb orb)
+    {
+		if (!instance.orbs.Contains(orb))
+        {
+			return;
+        }
+		instance.orbs.Remove(orb);
     }
 }

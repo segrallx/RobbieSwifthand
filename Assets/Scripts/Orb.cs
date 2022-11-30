@@ -28,6 +28,7 @@ public class Orb : MonoBehaviour
             gameObject.SetActive(false);
             Instantiate(explosionVFXPrefeb, transform.position, transform.rotation);
             AudioManager.PlayOrbAudio();
+            GameManager.PlayerGrabbedOrb(this);
         }
     }
 }
