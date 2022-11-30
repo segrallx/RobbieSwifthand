@@ -11,7 +11,8 @@ public class Orb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = LayerMask.NameToLayer("Player");    
+        player = LayerMask.NameToLayer("Player");
+        GameManager.RegisterOrb(this);
     }
 
     // Update is called once per frame

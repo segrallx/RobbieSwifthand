@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	static GameManager instance;
+	SceneFader fader;
+	List<Orb> orbs;
+	public int orbNum;
 
 	private void Awake()
 	{
@@ -15,6 +18,8 @@ public class GameManager : MonoBehaviour
 		}
 		instance = this;
 		DontDestroyOnLoad(this);
+
+		orbs = new List<Orb>();
 	}
 
 	public static void PlayerDied()
@@ -22,9 +27,28 @@ public class GameManager : MonoBehaviour
 		instance.Invoke("RestartScene", 1.5f);
     }
 
+	public static void RegisterOrb(Orb orb)
+    {
+		if(!instance.orbs.Contains(orb))
+        {
+			instance.orbs.Add(orb);
+        }
+    }
+
 	void RestartScene()
     {
+		instance.fader.FadeOut();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	public static void RegisterSceneFader(SceneFader obj)
+    {
+		instance.fader = obj;
+
+    }
+
+    private void Update()
+    {
+		orbNum = orbs.Count;
+    }
 }
